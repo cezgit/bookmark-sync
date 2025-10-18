@@ -14,11 +14,12 @@ export class BookmarkProcessor {
   flattenBookmarks(bookmarkFile: BookmarkFile): FlatBookmark[] {
     const flatBookmarks: FlatBookmark[] = [];
 
-    const traverse = (node: BookmarkNode, path: string[] = []): void => {
+    const traverse = (node: BookmarkNode, path: string[] = [], isRoot: boolean = false): void => {
       if (node.type === 'folder') {
-        const newPath = node.name ? [...path, node.name] : path;
+        // Skip adding the root folder's name to the path since we're already inside it
+        const newPath = (node.name && !isRoot) ? [...path, node.name] : path;
         if (node.children) {
-          node.children.forEach(child => traverse(child, newPath));
+          node.children.forEach(child => traverse(child, newPath, false));
         }
       } else if (node.type === 'url' && node.url) {
         flatBookmarks.push({
@@ -32,14 +33,14 @@ export class BookmarkProcessor {
       }
     };
 
-    // Process bookmark bar
+    // Process bookmark bar (pass isRoot=true to skip adding "Bookmarks Bar" to path)
     if (bookmarkFile.roots.bookmark_bar) {
-      traverse(bookmarkFile.roots.bookmark_bar, []);
+      traverse(bookmarkFile.roots.bookmark_bar, [], true);
     }
 
     // Process other bookmarks if they exist
     if (bookmarkFile.roots.other) {
-      traverse(bookmarkFile.roots.other, ['Other Bookmarks']);
+      traverse(bookmarkFile.roots.other, ['Other Bookmarks'], true);
     }
 
     return flatBookmarks;
