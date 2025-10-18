@@ -35,6 +35,7 @@ Automated two-way bookmark synchronization between Perplexity Comet and Google C
    - Install Node.js dependencies
    - Build the TypeScript code
    - Run a test synchronization
+   - Generate launcher script and plist from templates
    - Install and start the macOS Launch Agent
 
 ## Manual Usage
@@ -107,7 +108,15 @@ By default, the sync runs:
 - **Every hour** (3600 seconds)
 - **On system startup** (RunAtLoad)
 
-To change the interval, edit `ai.bookmarksync.plist` and update the `StartInterval` value (in seconds).
+To change the interval:
+1. Edit `ai.bookmarksync.plist.template` and update the `StartInterval` value (in seconds)
+2. Re-run the installer: `./install.sh`
+
+Alternatively, you can manually edit the generated `~/Library/LaunchAgents/ai.bookmarksync.plist` and reload:
+```bash
+launchctl unload ~/Library/LaunchAgents/ai.bookmarksync.plist
+launchctl load ~/Library/LaunchAgents/ai.bookmarksync.plist
+```
 
 ## Safety Features
 
@@ -150,6 +159,21 @@ cp ~/.bookmark-sync/backups/Bookmarks.2025-10-17T15-30-00.backup \
 cp ~/.bookmark-sync/backups/Bookmarks.2025-10-17T15-30-00.backup \
    ~/Library/Application\ Support/Google/Chrome/Default/Bookmarks
 ```
+
+## Generated Files
+
+The installation process generates user-specific files from templates:
+
+**Template files (in repository):**
+- `ai.bookmarksync.plist.template` - Launch Agent configuration template
+- `bookmark-sync-launcher.sh.template` - Launcher script template
+
+**Generated files (not in repository):**
+- `ai.bookmarksync.plist` - Your personalized Launch Agent configuration
+- `bookmark-sync-launcher.sh` - Your personalized launcher with Node.js path
+- `~/Library/LaunchAgents/ai.bookmarksync.plist` - Installed Launch Agent
+
+The launcher script sets a custom process name ("Bookmark Sync") so the service appears with a descriptive name in macOS System Settings instead of "node".
 
 ## Architecture
 

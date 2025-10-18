@@ -9,8 +9,7 @@
     <!-- Program to execute -->
     <key>ProgramArguments</key>
     <array>
-        <string>{{NODE_PATH}}</string>
-        <string>{{PROJECT_DIR}}/dist/index.js</string>
+        <string>{{PROJECT_DIR}}/bookmark-sync-launcher.sh</string>
     </array>
 
     <!-- Run every hour -->

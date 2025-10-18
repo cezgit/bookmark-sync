@@ -3,6 +3,8 @@ node_modules
 dist
 .idea
 docs
+*.iml
 
-# Generated plist file (created from template during installation)
+# Generated files (created from templates during installation)
 ai.bookmarksync.plist
+bookmark-sync-launcher.sh

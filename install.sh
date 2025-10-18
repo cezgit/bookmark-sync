@@ -42,6 +42,29 @@ sleep 5
 
 npm run sync
 
+# Generate launcher script from template
+LAUNCHER_TEMPLATE="$SCRIPT_DIR/bookmark-sync-launcher.sh.template"
+LAUNCHER_GENERATED="$SCRIPT_DIR/bookmark-sync-launcher.sh"
+
+echo ""
+echo "Generating launcher script..."
+
+# Check if launcher template exists
+if [ ! -f "$LAUNCHER_TEMPLATE" ]; then
+    echo "ERROR: Launcher template not found: $LAUNCHER_TEMPLATE"
+    exit 1
+fi
+
+# Generate launcher script from template by replacing placeholders
+sed -e "s|{{NODE_PATH}}|$NODE_PATH|g" \
+    -e "s|{{PROJECT_DIR}}|$SCRIPT_DIR|g" \
+    "$LAUNCHER_TEMPLATE" > "$LAUNCHER_GENERATED"
+
+# Make launcher script executable
+chmod +x "$LAUNCHER_GENERATED"
+
+echo "✓ Generated launcher script: $LAUNCHER_GENERATED"
+
 # Generate plist from template
 LAUNCH_AGENTS_DIR="$HOME/Library/LaunchAgents"
 PLIST_NAME="ai.bookmarksync.plist"

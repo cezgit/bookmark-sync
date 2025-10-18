@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Bookmark Sync Launcher
+# This wrapper script launches the bookmark sync service with a custom process name
+# so it appears as "Bookmark Sync" in macOS System Settings instead of "Node.js Foundation"
+
+# Set the process name for macOS Activity Monitor and System Settings
+exec -a "Bookmark Sync" {{NODE_PATH}} {{PROJECT_DIR}}/dist/index.js

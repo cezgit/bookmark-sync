@@ -107,12 +107,16 @@ rm ~/Library/LaunchAgents/ai.bookmarksync.plist
 
 ### Need to change the sync interval?
 
-Edit `ai.bookmarksync.plist` and change the `StartInterval` value (in seconds):
-- 3600 = 1 hour (default)
-- 1800 = 30 minutes
-- 7200 = 2 hours
+**Method 1: Edit template and reinstall (recommended)**
+1. Edit `ai.bookmarksync.plist.template` and change the `StartInterval` value (in seconds):
+   - 3600 = 1 hour (default)
+   - 1800 = 30 minutes
+   - 7200 = 2 hours
+2. Re-run the installer: `./install.sh`
 
-Then reload:
+**Method 2: Edit generated file directly**
+1. Edit `~/Library/LaunchAgents/ai.bookmarksync.plist` and change the `StartInterval` value
+2. Reload the service:
 ```bash
 launchctl unload ~/Library/LaunchAgents/ai.bookmarksync.plist
 launchctl load ~/Library/LaunchAgents/ai.bookmarksync.plist
