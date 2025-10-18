@@ -1,0 +1,8 @@
+node_modules
+.claude
+dist
+.idea
+docs
+
+# Generated plist file (created from template during installation)
+ai.bookmarksync.plist

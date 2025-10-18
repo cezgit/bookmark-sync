@@ -1,0 +1,42 @@
+{
+  "name": "bookmark-sync",
+  "version": "1.0.0",
+  "description": "Automated two-way bookmark synchronization between Perplexity Comet and Google Chrome browsers on macOS",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "sync": "tsx src/index.ts",
+    "start": "npm run sync",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bookmark",
+    "sync",
+    "synchronization",
+    "chrome",
+    "comet",
+    "perplexity",
+    "browser",
+    "macos",
+    "chromium"
+  ],
+  "author": "Cezar Balaita <cezarb@gmail.com>",
+  "license": "ISC",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<your-username>/bookmark-sync.git"
+  },
+  "bugs": {
+    "url": "https://github.com/<your-username>/bookmark-sync/issues"
+  },
+  "homepage": "https://github.com/<your-username>/bookmark-sync#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.8.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}
