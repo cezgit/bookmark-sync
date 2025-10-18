@@ -18,11 +18,18 @@ The installer will:
 
 ## Manual Sync
 
+**⚠️ Important:** Close both Chrome and Comet completely (Cmd+Q) before running a sync.
+
 To run a manual sync at any time:
 
 ```bash
+# 1. Close Chrome and Comet first
+# 2. Run the sync
 npm run sync
+# 3. Reopen your browsers
 ```
+
+Why? Browsers keep bookmarks in memory and will overwrite any file changes made while they're running.
 
 ## View Logs
 
@@ -83,6 +90,8 @@ rm ~/Library/LaunchAgents/ai.bookmarksync.plist
 3. **Smart Duplicate Detection**: Skips bookmarks that already exist (by URL)
 4. **Safe**: Creates backups before every sync
 5. **Logged**: All operations logged to `~/Library/Logs/bookmark-sync.log`
+
+**Note:** For best results, close both browsers when the sync runs (especially for manual syncs). The hourly automatic sync works best when browsers are not actively running.
 
 ## What Gets Synced
 

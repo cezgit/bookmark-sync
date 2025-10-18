@@ -18,6 +18,20 @@ Automated two-way bookmark synchronization between Perplexity Comet and Google C
 - Google Chrome installed
 - Perplexity Comet browser installed
 
+## Important: Browser State
+
+**⚠️ Both Chrome and Comet must be completely closed before running a sync.**
+
+Chromium-based browsers keep bookmarks in memory and periodically write them to disk. If you run a sync while the browsers are open, they will overwrite the synced changes with their in-memory version, causing the sync to appear to fail.
+
+**Before syncing:**
+1. Completely quit Google Chrome (Cmd+Q or Chrome > Quit)
+2. Completely quit Perplexity Comet (Cmd+Q or Comet > Quit)
+3. Run the sync
+4. Reopen your browsers
+
+This applies to both manual syncs and the automatic hourly sync.
+
 ## Installation
 
 1. **Clone this repository**:
@@ -41,6 +55,9 @@ Automated two-way bookmark synchronization between Perplexity Comet and Google C
 ## Manual Usage
 
 ### Run a one-time sync:
+
+**Important:** Close both Chrome and Comet completely before running the sync.
+
 ```bash
 npm run sync
 ```
@@ -141,7 +158,9 @@ Bookmarks are considered duplicates if they have the same URL. The sync:
 3. Manually run sync to see errors: `npm run sync`
 
 ### Bookmarks not syncing:
-1. Ensure both browsers are closed during sync
+1. **Most common issue:** Ensure both Chrome and Comet are completely closed (Cmd+Q) before and during sync
+   - Browsers keep bookmarks in memory and will overwrite file changes
+   - Check if browsers are running: `ps aux | grep -i "chrome\|comet" | grep -v grep`
 2. Check logs: `tail -f ~/Library/Logs/bookmark-sync.log`
 3. Verify bookmark file permissions
 4. Check that bookmark files exist at expected paths
